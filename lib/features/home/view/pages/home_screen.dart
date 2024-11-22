@@ -3,8 +3,10 @@ import 'package:aifer_task/core/variables/variables.dart';
 import 'package:aifer_task/core/widgets/loader.dart';
 import 'package:aifer_task/features/home/view/widgets/image_card.dart';
 import 'package:aifer_task/features/home/viewmodel/home_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -55,34 +57,44 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     h = MediaQuery.of(context).size.height;
     w = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Pallete.backgroundColor,
-        surfaceTintColor: Pallete.backgroundColor,
-        title: Text(
-          'All',
-          style: GoogleFonts.roboto(),
-        ),
-        centerTitle: true,
-      ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: h * .01, horizontal: w * .025),
+        padding: EdgeInsets.symmetric(vertical: h * .012, horizontal: w * .042),
         child: Consumer(builder: (context, ref, child) {
           final homeViewModel = ref.watch(homeViewModelProvider).value;
           final isLoading = ref.watch(homeViewModelProvider).isLoading;
           return Column(
             children: [
+              SizedBox(
+                height: h * .03,
+              ),
+              SizedBox(
+                height: h * .1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('  Free Walls',
+                        style: GoogleFonts.poppins(
+                            fontSize: w * .1, fontWeight: FontWeight.bold)),
+                    Icon(
+                      CupertinoIcons.gamecontroller,
+                      size: w * .1,
+                      color: Pallete.greenColor,
+                    )
+                  ],
+                ),
+              ),
               Expanded(
-                child: GridView.builder(
+                child: MasonryGridView.builder(
                   controller: _controller,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Number of columns
-                    crossAxisSpacing: 8.0, // Space between columns
-                    mainAxisSpacing: 8.0, // Space between rows
+                  gridDelegate:
+                      const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Two items per row
                   ),
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
                   itemCount: homeViewModel == null ? 0 : homeViewModel.length,
                   itemBuilder: (context, index) {
-                    return ImageCard(
-                        url: homeViewModel![index].urls);
+                    return ImageCard(url: homeViewModel![index].urls);
                   },
                 ),
               ),

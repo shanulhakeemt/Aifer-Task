@@ -4,6 +4,7 @@ import 'package:aifer_task/core/widgets/loader.dart';
 import 'package:aifer_task/features/home/view/widgets/custom_button.dart';
 import 'package:aifer_task/features/home/viewmodel/home_viewmodel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,10 +17,14 @@ class ImageViewScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(CupertinoIcons.back)),
         centerTitle: true,
         title: Text(
           'Image',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.poppins(
+              fontSize: w * .06, fontWeight: FontWeight.bold),
         ),
       ),
       body: Padding(

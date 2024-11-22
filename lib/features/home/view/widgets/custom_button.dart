@@ -4,7 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
-    super.key, required this.height, required this.text, required this.textSize,
+    super.key,
+    required this.height,
+    required this.text,
+    required this.textSize,
   });
   final double height;
   final double textSize;
@@ -13,15 +16,15 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:height,
+      height: height,
       width: double.infinity,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(7),
-          color: Pallete.secondoryColor),
+          borderRadius: BorderRadius.circular(7), color: Pallete.greenColor),
       child: Center(
         child: Text(
           text,
-          style: GoogleFonts.roboto(fontSize: textSize),
+          style: GoogleFonts.poppins(
+              fontSize: textSize, fontWeight: FontWeight.w600),
         ),
       ),
     );
