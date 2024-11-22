@@ -1,5 +1,4 @@
 import 'package:aifer_task/core/constants/asset_constants.dart';
-import 'package:aifer_task/core/theme/app_pallete.dart';
 import 'package:aifer_task/core/variables/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
