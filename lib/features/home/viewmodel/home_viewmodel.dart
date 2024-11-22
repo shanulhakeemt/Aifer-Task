@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:aifer_task/core/models/image_model.dart';
 import 'package:aifer_task/core/utils.dart';
 import 'package:aifer_task/features/home/repository/home_repository.dart';
@@ -13,13 +12,11 @@ final homeViewModelProvider =
 
 class HomeViewModel extends AsyncNotifier<List<ImageModel>> {
   int _pages = 1;
-  bool _hasMore = true;
-  bool get hasMore => _hasMore;
   late HomeRepository _homeRepository;
 
   getImages({required BuildContext context}) async {
     state = const AsyncLoading();
-
+    await Future.delayed(const Duration(microseconds: 1));
     final res = await _homeRepository.getImages(pages: _pages);
     res.fold(
       (l) => showSnackBar(context, l.message),
@@ -31,6 +28,20 @@ class HomeViewModel extends AsyncNotifier<List<ImageModel>> {
       },
     );
     _pages++;
+  }
+
+  Future<void> downloadImageToStorage(String url, BuildContext context) async {
+    state = const AsyncLoading();
+    final res = await _homeRepository.downloadImageToStorage(url);
+    state = await AsyncValue.guard(
+          () => Future.value([...state.value!]),
+        );
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) {
+        showSnackBar(context, r);
+      },
+    );
   }
 
   @override
