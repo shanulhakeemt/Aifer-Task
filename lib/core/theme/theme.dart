@@ -6,6 +6,7 @@ class AppTheme {
   static final darkThemeMode = ThemeData.dark().copyWith(
       scaffoldBackgroundColor: Pallete.backgroundColor,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Pallete.backgroundColor,
         selectedItemColor: Pallete.greenColor, // Selected icon color
         unselectedItemColor: Pallete.greyColor, // Unselected icon color
         selectedLabelStyle: GoogleFonts.poppins(

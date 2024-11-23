@@ -1,4 +1,5 @@
 import 'package:aifer_task/core/theme/app_pallete.dart';
+import 'package:aifer_task/features/category/view/pages/category_screen.dart';
 import 'package:aifer_task/features/home/view/pages/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,7 @@ class NavScreen extends ConsumerWidget {
     Scaffold(
       backgroundColor: Pallete.secondoryColor,
     ),
-    Scaffold(
-      backgroundColor: Pallete.greenColor,
-    ),
+    CategoryScreen(),
   ];
 
   updateNavIndex(int index, WidgetRef ref) {
